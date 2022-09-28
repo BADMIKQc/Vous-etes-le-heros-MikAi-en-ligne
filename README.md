@@ -8,4 +8,4 @@
  
  **Palette de couleurs**: [coolors.co(nature)](https://coolors.co/fffd98-bde4a7-b3d2b2-9fbbcc-7a9cc6)
  
- **Diagramme**: ![alt text]()
+ **Diagramme**: ![](assets/tourangeau_mikael_synopsis.png)
