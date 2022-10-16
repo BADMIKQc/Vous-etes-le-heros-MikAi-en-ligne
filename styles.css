@@ -59,28 +59,32 @@ img{
 }
 .btn1{
     width: 200px;
-    height: 50px;
+  
     background-color: rgb(135, 238, 79);
-    margin-left: 70px;
+    margin-left: 75px;
     border-radius: 20px;
+    text-align: center;
 }
 .btn2{
     width: 200px;
-    height: 50px;
     background-color: rgb(135, 238, 79);
+    margin-left: 37.5px;
+    margin-right: 37.5px;
     border-radius: 20px;
+    text-align: center;
 }
 .btn3{
     width: 200px;
-    height: 50px;
     background-color: rgb(135, 238, 79);
-    margin-right: 70px;
+    margin-right: 75px;
     border-radius: 20px;
+    text-align: center;
+
 }
 .textebtn{
-   position: absolute;
-   bottom: -26px;
-   margin-left: 60px;
+   
+  
+   
     font-family: "Teko";
     font-size: 30px;
 }
