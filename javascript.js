@@ -16,7 +16,7 @@ chapitre2  : {
                 
         {text:"non", action:"goToChapter('chapitre1')"}, 
             
-        {text:"oui", action:"goToChapter('chapitre3')"}]},
+        {text:"oui", action:"keyfalse ()"}]},
 
 chapitre3  : {
     subtitle: "entrez jeu",
@@ -24,7 +24,7 @@ chapitre3  : {
     img: "assets/img/entrer_vr.PNG",
     options: [
                 
-        {text:"continuer", action:"goToChapter('chapitre4')"}]},
+        {text:"continuer", action:"Armefalse()"}]},
     
 chapitre4  : {
     subtitle: "Choix de l'arme",
@@ -32,9 +32,9 @@ chapitre4  : {
     img: "assets/img/choix_arme.png",
     options: [
                 
-        {text:"épée", action:"goToChapter('chapitre5')"}, 
+        {text:"bouclier", action:"bouclier()"}, 
             
-        {text:"bouclier", action:"goToChapter('chapitre5')"}]},
+        {text:"épée", action:"epee ()"}]},
         
 chapitre5  : {
     subtitle: "entre dans village",
@@ -50,7 +50,7 @@ chapitre6  : {
     img: "assets/img/village_fermier.png",
     options: [
                 
-        {text:"lui donner une patate", action:"goToChapter('chapitre7')"}, 
+        {text:"lui donner une patate", action:"hommeNouriture () "}, 
             
         {text:"l'ignorer", action:"goToChapter('chapitre7')"}]},
         
@@ -70,9 +70,7 @@ chapitre8  : {
     img: "assets/img/poulet_affronte.png",
     options: [
                 
-        {text:"vous avez l'épée", action:"goToChapter('chapitre9')"}, 
-            
-        {text:"vous avez le bouclier", action:"goToChapter('chapitre13')"}]},
+        {text:"continuer", action:"pouletArme()"},]},
         
 chapitre9  : {
     subtitle: "poulet attaque épée",
@@ -142,9 +140,7 @@ chapitre16  : {
     img: "assets/img/canard.png",
     options: [
                 
-        {text:"vous avez l'épée", action:"goToChapter('chapitre17')"}, 
-            
-        {text:"vous avez le bouclier", action:"goToChapter('chapitre20')"}]},
+        {text:"continuer", action:"canardArme()"},]},
 
 chapitre17  : {
     subtitle: "canard attaque épée",
@@ -222,9 +218,7 @@ chapitre25  : {
     img: "assets/img/dragon.png",
     options: [
                 
-        {text:"vous avez l'épée", action:"goToChapter('chapitre26')"}, 
-            
-        {text:"vous avez le bouclier", action:"goToChapter('chapitre28')"}]},   
+        {text:"continuer", action:"goToChapter('chapitre26')"},]},   
 
 chapitre26  : {
     subtitle: "dragon action épée",
@@ -268,13 +262,11 @@ chapitre30  : {
     img: "assets/img/dragon_avez_vous.png",
     options: [
                 
-        {text:"non", action:"goToChapter('chapitre31')"}, 
-            
-        {text:"oui", action:"goToChapter('chapitre32')"}]},  
+             {text:"oui", action:"hommeNonNouriture()"}]},  
 
 chapitre31  : {
     subtitle: "dragon mange",
-    text: "le dragon vous mange tout rond ",
+    text: "vous n'avez pas aidez le passant,donc il part. Le dragon vous mange tout rond ",
     img: "assets/img/dragon_mange.png",
     options: [
                 
@@ -282,7 +274,7 @@ chapitre31  : {
 
 chapitre32  : {
     subtitle: "patate tue",
-    text: "l'homme lance la patate dur le dragon et le tue",
+    text: "l'homme lance la patate sur le dragon et le tue",
     img: "assets/img/dragon_mort.png",
     options: [
                 
@@ -306,12 +298,80 @@ function goToChapter (chapterName)
     document.querySelector("h1").innerHTML=chaptersObj[chapterName]["subtitle"];
     document.querySelector("h2").innerHTML=chaptersObj[chapterName]["text"];
     document.querySelector(".imgchange").innerHTML= `<img src="${chaptersObj[chapterName]["img"]}" class="image">`;
-    document.getElementById("texte1").innerHTML=chaptersObj[chapterName]["options"][0]["text"];
-    document.getElementById("texte2").innerHTML=chaptersObj[chapterName]["options"][1]["text"];
-    document.getElementById("texte3").innerHTML=chaptersObj[chapterName]["options"][2]["text"];
+    
+    let bouton = document.querySelector(".bouton")
+    bouton.innerHTML=""
+  
+    for(element of chaptersObj[chapterName]["options"]){
+    let btnAction = document.createElement("button")
+    let btnActionInt = document.createTextNode(element["text"])
+    btnAction.appendChild(btnActionInt)
+    btnAction.setAttribute("onclick",element["action"])
+    btnAction.setAttribute("type","button")
+    bouton.appendChild(btnAction)}
+
+   
 
     
 
 console.log(chaptersObj[chapterName]["subtitle"]);
 console.log(chaptersObj[chapterName]["text"]);
 };
+let keyFounded = false;
+let epeeFounded = false;
+let bouclierFounded = false;
+
+function hommeNouriture (){
+    keyFounded = true;
+    goToChapter('chapitre7')
+}
+function hommeNonNouriture(){
+    if(keyFounded == true){
+        goToChapter('chapitre32')
+    }
+    if(keyFounded == false){
+        goToChapter('chapitre31')
+    }
+}
+function keyfalse (){
+    keyFounded = false;
+    goToChapter('chapitre3')
+}
+
+function epee (){
+    epeeFounded = true;
+    goToChapter('chapitre5')
+}
+
+function bouclier (){
+    bouclierFounded = true;
+    goToChapter('chapitre5')
+}
+function pouletArme(){
+    if(epeeFounded == true){
+        goToChapter('chapitre9')
+    }
+    if(bouclierFounded == true){
+        goToChapter('chapitre13')
+    }
+}
+function Armefalse (){
+    epeeFounded = false;
+    bouclierFounded = false;
+    goToChapter('chapitre4')
+}
+function canardArme(){
+    if(epeeFounded == true){
+        goToChapter('chapitre17')
+    }
+    if(bouclierFounded == true){
+        goToChapter('chapitre20')
+    }}
+
+function dragonArme(){
+    if(epeeFounded == true){
+        goToChapter('chapitre26')
+    }
+    if(bouclierFounded == true){
+        goToChapter('chapitre28')
+    }}
