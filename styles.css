@@ -57,47 +57,32 @@ img{
     
     
 }
-.btn1{
+.bouton :nth-child(1){
     width: 200px;
   
     background-color: rgb(135, 238, 79);
-    margin-left: 75px;
+    margin-left: 150px;
     border-radius: 20px;
     text-align: center;
+    color: #fff;
+    font-family: "Teko";
+    font-size: 30px;
 }
-.btn2{
+.bouton :nth-child(2){
     width: 200px;
     background-color: rgb(135, 238, 79);
-    margin-left: 37.5px;
-    margin-right: 37.5px;
+    
+    margin-right: 150px;
     border-radius: 20px;
     text-align: center;
-}
-.btn3{
-    width: 200px;
-    background-color: rgb(135, 238, 79);
-    margin-right: 75px;
-    border-radius: 20px;
-    text-align: center;
-
-}
-.textebtn{
-   
-  
-   
+    color: #fff;
     font-family: "Teko";
     font-size: 30px;
 }
 
-.btn1:hover{
+
+
+.btn:hover{
     background-color: rgb(73, 116, 50);
 } 
-.btn2:hover{
-    background-color: rgb(73, 116, 50);
-} 
-.btn3:hover{
-    background-color: rgb(73, 116, 50);
-} 
-p{
-    color: #fff;
-}
+
