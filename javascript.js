@@ -4,6 +4,7 @@ chapitre1 : {
     subtitle: "entre dans la vr",
     text: "bienvenue en vr!",
     img: "assets/img/entrer_vr.PNG",
+    video: "assets/video-sound/enter.mp4",
     options: [
         
         {text:"continuer", action:"goToChapter('chapitre2')"}]},
@@ -22,6 +23,7 @@ chapitre3  : {
     subtitle: "entrez jeu",
     text: "vous entrez dans le jeu",
     img: "assets/img/entrer_vr.PNG",
+    video: "assets/video-sound/enter.mp4",
     options: [
                 
         {text:"continuer", action:"Armefalse()"}]},
@@ -284,6 +286,7 @@ chapitre33  : {
     subtitle: "fin",
     text: "bravo vous avez vaincu le dragon, le plus grand monstre du jeux !",
     img: "assets/img/bravo.png",
+    video: "assets/video-sound/victory.mp4",
     options: [
                 
         {text:"refaire l'aventure", action:"goToChapter('chapitre2')"}]},  
@@ -294,11 +297,24 @@ chapitre33  : {
 
 function goToChapter (chapterName) 
 {
-    
+     
     document.querySelector("h1").innerHTML=chaptersObj[chapterName]["subtitle"];
     document.querySelector("h2").innerHTML=chaptersObj[chapterName]["text"];
-    document.querySelector(".imgchange").innerHTML= `<img src="${chaptersObj[chapterName]["img"]}" class="image">`;
+
+   
     
+  
+
+
+    if(chaptersObj[chapterName]["video"]){
+        document.querySelector(".imgchange").innerHTML= `<video src="${chaptersObj[chapterName]["video"]}" class="video-class"  autoplay muted loop>`;
+    }
+    else{
+        document.querySelector(".imgchange").innerHTML= `<img src="${chaptersObj[chapterName]["img"]}" class="image">`;
+    };
+ 
+   
+
     let bouton = document.querySelector(".bouton")
     bouton.innerHTML=""
   
@@ -310,13 +326,30 @@ function goToChapter (chapterName)
     btnAction.setAttribute("type","button")
     bouton.appendChild(btnAction)}
 
-   
 
+   
     
 
-console.log(chaptersObj[chapterName]["subtitle"]);
-console.log(chaptersObj[chapterName]["text"]);
+   
+  const son = document.querySelector(".audio");
+  bouton.addEventListener("click", function(){
+  son.play();
+
+
+ localStorage.setItem("chaptersObj",chapterName);
+    chapterName = localStorage.getItem("chaptersObj");
+
+  });
+    
+
+
 };
+
+
+
+
+
+
 let keyFounded = false;
 let epeeFounded = false;
 let bouclierFounded = false;
@@ -324,6 +357,7 @@ let bouclierFounded = false;
 function hommeNouriture (){
     keyFounded = true;
     goToChapter('chapitre7')
+    localStorage.setItem("keyFounded",keyFounded)
 }
 function hommeNonNouriture(){
     if(keyFounded == true){
@@ -332,31 +366,37 @@ function hommeNonNouriture(){
     if(keyFounded == false){
         goToChapter('chapitre31')
     }
+    localStorage.setItem("keyFounded",keyFounded)
 }
 function keyfalse (){
-    keyFounded = false;
+   keyFounded = false;
     goToChapter('chapitre3')
 }
 
 function epee (){
-    epeeFounded = true;
+  epeeFounded = true;
     goToChapter('chapitre5')
+    localStorage.setItem("epeeFounded",epeeFounded)
 }
 
 function bouclier (){
-    bouclierFounded = true;
+   bouclierFounded = true;
     goToChapter('chapitre5')
+    localStorage.setItem("bouclierFounded",bouclierFounded)
 }
 function pouletArme(){
     if(epeeFounded == true){
         goToChapter('chapitre9')
     }
+    
     if(bouclierFounded == true){
         goToChapter('chapitre13')
     }
+    localStorage.setItem("epeeFounded",epeeFounded)
+    localStorage.setItem("bouclierFounded",bouclierFounded)
 }
 function Armefalse (){
-    epeeFounded = false;
+   epeeFounded = false;
     bouclierFounded = false;
     goToChapter('chapitre4')
 }
@@ -366,7 +406,10 @@ function canardArme(){
     }
     if(bouclierFounded == true){
         goToChapter('chapitre20')
-    }}
+    }
+    localStorage.setItem("bouclierFounded",bouclierFounded)
+    localStorage.setItem("epeeFounded",epeeFounded)
+}
 
 function dragonArme(){
     if(epeeFounded == true){
@@ -374,4 +417,12 @@ function dragonArme(){
     }
     if(bouclierFounded == true){
         goToChapter('chapitre28')
-    }}
+    }
+    localStorage.setItem("epeeFounded",epeeFounded)
+}
+    
+    
+    if(localStorage.getItem('chaptersObj')){
+        goToChapter(localStorage.getItem('chaptersObj'))
+        }else{
+        goToChapter('chapitre1')}

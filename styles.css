@@ -46,6 +46,9 @@ html{
 img{
     width: 760px;
 }
+.video-class{
+    width: 760px;
+}
 .bouton{
     position: relative;
     width: 900px;
