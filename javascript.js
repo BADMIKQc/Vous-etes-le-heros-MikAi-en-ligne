@@ -294,10 +294,14 @@ chapitre33  : {
 };
 
 
-
+ let body = document.querySelector("body")
 function goToChapter (chapterName) 
 {
-     
+   
+
+
+
+    
     document.querySelector("h1").innerHTML=chaptersObj[chapterName]["subtitle"];
     document.querySelector("h2").innerHTML=chaptersObj[chapterName]["text"];
 
@@ -330,10 +334,17 @@ function goToChapter (chapterName)
    
     
 
-   
+  let checkBTN = document.querySelector(".check");
   const son = document.querySelector(".audio");
   bouton.addEventListener("click", function(){
-  son.play();
+  
+   if (checkBTN.checked == true){
+
+     son.play();  
+   }
+       
+    
+
 
 
  localStorage.setItem("chaptersObj",chapterName);
@@ -343,48 +354,41 @@ function goToChapter (chapterName)
     
 
 
+body.classList.remove(body.classList[0])
+body.classList.add(chapterName)
+console.log(body.classList)
 };
 
 
 
 
 
+let epeeFounded = false
+let keyFounded = false
+let bouclierFounded = false
 
-let keyFounded = false;
-let epeeFounded = false;
-let bouclierFounded = false;
-
-function hommeNouriture (){
-    keyFounded = true;
-    goToChapter('chapitre7')
-    localStorage.setItem("keyFounded",keyFounded)
-}
-function hommeNonNouriture(){
-    if(keyFounded == true){
-        goToChapter('chapitre32')
-    }
-    if(keyFounded == false){
-        goToChapter('chapitre31')
-    }
-    localStorage.setItem("keyFounded",keyFounded)
-}
-function keyfalse (){
-   keyFounded = false;
-    goToChapter('chapitre3')
-}
-
+// epee debut
 function epee (){
+
   epeeFounded = true;
     goToChapter('chapitre5')
-    localStorage.setItem("epeeFounded",epeeFounded)
+    localStorage.setItem("epeeFounded",true)
 }
-
+// bouclier debut
 function bouclier (){
    bouclierFounded = true;
     goToChapter('chapitre5')
-    localStorage.setItem("bouclierFounded",bouclierFounded)
+    localStorage.setItem("bouclierFounded",true)
 }
+// homme debut
+function hommeNouriture (){
+    keyFounded = true;
+    goToChapter('chapitre7')
+    localStorage.setItem("keyFounded",true)
+}
+// poulet if
 function pouletArme(){
+    
     if(epeeFounded == true){
         goToChapter('chapitre9')
     }
@@ -392,14 +396,9 @@ function pouletArme(){
     if(bouclierFounded == true){
         goToChapter('chapitre13')
     }
-    localStorage.setItem("epeeFounded",epeeFounded)
-    localStorage.setItem("bouclierFounded",bouclierFounded)
+   
 }
-function Armefalse (){
-   epeeFounded = false;
-    bouclierFounded = false;
-    goToChapter('chapitre4')
-}
+//canard if
 function canardArme(){
     if(epeeFounded == true){
         goToChapter('chapitre17')
@@ -407,10 +406,9 @@ function canardArme(){
     if(bouclierFounded == true){
         goToChapter('chapitre20')
     }
-    localStorage.setItem("bouclierFounded",bouclierFounded)
-    localStorage.setItem("epeeFounded",epeeFounded)
+    
 }
-
+//dragon if
 function dragonArme(){
     if(epeeFounded == true){
         goToChapter('chapitre26')
@@ -418,11 +416,66 @@ function dragonArme(){
     if(bouclierFounded == true){
         goToChapter('chapitre28')
     }
-    localStorage.setItem("epeeFounded",epeeFounded)
+  
 }
+
+// homme if
+function hommeNonNouriture(){
+    if(keyFounded == true){
+        goToChapter('chapitre32')
+    }
+    if(keyFounded == false){
+        goToChapter('chapitre31')
+    }
+   
+}
+// homme false
+function keyfalse (){
+   keyFounded = false;
+    goToChapter('chapitre3')
+    localStorage.setItem("keyFounded",false)
+}
+//arme false
+function Armefalse (){
+   epeeFounded = false;
+    bouclierFounded = false;
+    goToChapter('chapitre4')
+    localStorage.setItem("epeeFounded",false);
+    localStorage.setItem("bouclierFounded",false);
     
-    
+}
+
+    if (localStorage.getItem("epeeFounded") == "true"){
+        epeeFounded = true};
+    if (localStorage.getItem("bouclierFounded") == "true"){
+        bouclierFounded = true  };
+    if (localStorage.getItem("keyFounded") == "true"){
+        keyFounded = true   
+    };
+    if (localStorage.getItem("epeeFounded") == "false"){
+        epeeFounded = false};
+    if (localStorage.getItem("bouclierFounded") == "false"){
+        bouclierFounded = false  };
+    if (localStorage.getItem("keyFounded") == "false"){
+        keyFounded = false   
+    };
     if(localStorage.getItem('chaptersObj')){
+    
         goToChapter(localStorage.getItem('chaptersObj'))
         }else{
         goToChapter('chapitre1')}
+
+  
+let resetBTN = document.querySelector(".reset");
+  function reset(){
+        localStorage.clear();
+        goToChapter("chapitre1");
+    }
+    resetBTN.addEventListener("click",function(){
+        reset();
+    });
+
+
+   
+  
+

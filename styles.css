@@ -88,4 +88,55 @@ img{
 .btn:hover{
     background-color: rgb(73, 116, 50);
 } 
+.menu-haut{
+    display: flex;
+ 
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+.btn{
+    text-align: center;
+    color: #fff;
+    font-family: "Teko";
+    font-size: 30px;
+    position: relative;
+    padding: 10px;
+    background-color: rgb(135, 238, 79);
+    border-radius: 20px;
+    margin: 20px;
+   
+}
+.son{
+   
+  
+    color: #fff;
+    font-family: "Teko";
+    font-size: 30px;
+    margin: 20px;
+   
+}
+.check{
+  border: solid black 2px;   
+appearance: none;
+ background-color: white;
+ border-radius: 10px;
+ width: 40px;
+ height: 40px;
+}
+.check:checked{
+   background-image:url("assets/img/checked.png");
+   background-size: contain;
+}
+
+.chapitre4 .game{
+    background-color: rgb(36, 138, 255);
+}
+.chapitre6 .game{
+    background-color: rgba(138, 44, 0, 0.849);
+}
+.chapitre33 .game{
+    background-image:url("assets/img/noir_bacjkground.jpg");
+    background-size: contain;
+}
 
